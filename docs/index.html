@@ -1,0 +1,378 @@
+<!<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title> EvaGaussians: Event Stream Assisted Gaussian Splatting from Blurry Images</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="static/css/academicons.min.css">
+        <link rel="stylesheet" href="static/css/fontawesome.min.css">
+        <script src="static/js/all.min.js"></script>
+        <script src="static/js/bulma-carousel.min.js"></script>
+
+
+        <link rel="stylesheet" href="static/css/style.css">
+        <script src="static/js/script.js"></script>
+    </head>
+
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+
+            <div class="navbar-brand">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+        </nav>
+
+
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container is-max-desktop">
+                    <div class="columns is-centered">
+                        <div class="column has-text-centered">
+                            <!-- <h1 class="title is-1 is-size-3-mobile publication-title"> NeuralGS: Bridging Neural Fields and 3D Gaussian Splatting 
+                                for Compact 3D Representation</h1> -->
+                            <h1>
+                                <span class="gradient-text"> 🔥 EvaGaussians</span>: Event Stream Assisted Gaussian Splatting from Blurry Images
+                            </h1>
+                            <h2 class="subtitle is-4 opacity-1" style="margin-top: 1rem;opacity:0.7">Anonymous CVPR submission</h2>
+                            <div class="is-size-5 publication-authors">
+                                <span class="author-block"> Paper ID 1820 </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+            let currentIndex = 0;
+            function updateCarousel() {
+                const carousel = document.querySelector('.results-carousel');
+                const items = document.querySelectorAll('.results-carousel .item');
+                const itemWidth = items[0].clientWidth;
+                const offset = -currentIndex * itemWidth;
+                carousel.style.transform = `translateX(${offset}px)`;
+            }
+            function nextSlide() {
+                const items = document.querySelectorAll('.results-carousel .item');
+                if (currentIndex < items.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateCarousel();
+            }
+            function prevSlide() {
+                const items = document.querySelectorAll('.results-carousel .item');
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = items.length - 1; 
+                }
+                updateCarousel();
+            }
+        </script>
+        <section class="hero teaser is-light">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="carousel-wrapper">
+                        <button class="carousel-button prev" onclick="prevSlide()">&#8249;</button>
+                        <div class="results-carousel">
+                            <div class="item">
+                                <video autoplay controls muted loop playsinline>
+                                    <source src="./static/videos/EvaGaussian_Visualization_desert.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="item">
+                                <video autoplay controls muted loop playsinline>
+                                    <source src="./static/videos/EvaGaussian_Visualization_classroom.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="item">
+                                <video autoplay controls muted loop playsinline>
+                                    <source src="./static/videos/EvaGaussian_Visualization_desert.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <button class="carousel-button next" onclick="nextSlide()">&#8250;</button>
+                    </div>
+                </div>
+                <h2 class="subtitle has-text-centered is-size-6-mobile">
+                    Comparison results of novel view synthesis on the proposed datasets.
+                </h2>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <!-- Abstract. -->
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">📍 Abstract</h2>
+                        <div class="content has-text-justified">
+                            3D Gaussian Splatting (3D-GS) has demonstrated exceptional capabilities in synthesizing novel views of 3D scenes. However, its training is heavily reliant on high-quality images and precise camera poses. Meeting these criteria can be challenging in non-ideal real-world conditions, where motion-blurred images frequently occur due to high-speed camera movements or low-light environments.
+                            To address these challenges, we introduce Event Stream Assisted Gaussian Splatting (<span class="gradient-text"><strong>EvaGaussians</strong></span>), a novel approach that harnesses event streams captured by event cameras to facilitate the learning of high-quality 3D-GS from blurred images. 
+                            Capitalizing on the high temporal resolution and dynamic range offered by event streams, we seamlessly integrate them into the initialization and optimization of 3D-GS, thereby enhancing the acquisition of high-fidelity novel views with intricate texture details. 
+                            To remedy the absence of evaluation benchmarks incorporating both event streams and RGB frames, we present two novel datasets comprising RGB frames, event streams, and corresponding camera parameters, featuring a wide variety of scenes and various camera motions. 
+                            We then conduct a thorough evaluation of our method, comparing it with leading techniques on the provided benchmark. 
+                            The comparison results reveal that our approach not only excels in generating high-fidelity novel views, but also offers faster training and inference speeds.
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <div class="is-centered" style="margin-bottom: 1.5rem;">
+                    <h2 class="title is-3">🚀 Proposed Method</h2>
+                </div>
+                <p>
+                    We introduce Event Stream Assisted Gaussian Splatting (<span class="gradient-text"><strong>EvaGaussians</strong></span>), which leverages the event streams captured by event cameras to enhance the learning of high-quality 3D-GS from motion-blurred images.
+                    Harnessing the exceptional temporal resolution and dynamic range offered by event streams, we use them to assist in the initialization of 3D-GS, and incorporate them to jointly optimize 3D-GS and camera trajectories of blurry images through a blur reconstruction loss and an event reconstruction loss.
+                    Due to the geometric ambiguity caused by blurry images, we further propose two event-assisted depth regularization terms to stabilize the geometry of 3D-GS. Through optimizing the 3D-GS in a progressive manner, our method can recover a high-quality 3D-GS that facilitates the real-time generation of high-fidelity novel views.
+                </p>
+                <br>
+                <div class="is-centered">
+                    <figure style="text-align: center;">
+                        <img src="static/img/pipeline.png" alt="Compression Pipeline" style="display: inline-block;">
+                        <figcaption style="text-align: center; margin-top: 0.5rem;">Figure 1: Overview of <span class="gradient-text"><strong>EvaGaussians</strong></span>. </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <div class="is-centered" style="margin-bottom: 1.5rem;">
+                    <h2 class="title is-3">🧸 Results</h2>
+                </div
+                <p>
+                    We evaluate our method on NeRF-Synthetic dataset and our proposed dataset for comparison. Our method overcomes the baselines in producing high-fidelity novel views, and significantly reducing training time as well as demonstrating substantial advantages in real-time application scenarios.
+                    
+                </p>
+                <br>
+
+
+
+                <div class="is-centered">
+                    <figure style="text-align: center;">
+                        <img src="static/img/vis_comprison.png" alt="Compression Pipeline" style="display: inline-block;">
+                        <figcaption style="text-align: center; margin-top: 0.5rem;">Figure 1: Qualitative comparison on the synthetic and real dataset. We show the rendering novel views on the top section (a) and exhibit
+                            both novel view synthesis results and input view deblurring results on the bottom section (b). It shows that our method achieves better performance in recovering the training blurry views as well as rendering novel views.  </figcaption>
+                    </figure>
+                </div>
+
+                <br>
+
+                <div class="is-centered">
+                    <figure style="text-align: center;">
+                        <figcaption style="text-align: center; margin-top: 0.5rem;"> Table 1. Quantitative results evaluated on <em>NeRF-Synthetic, redesigned Deblur-NeRF, and our proposed datasets</em>. We highlight the best-performing results in <strong>bold</strong> and the second-best results in <u>underline</u> for all compared methods.</figcaption>
+                        <img src="static/img/table1_evaluation.png" alt="Compression Pipeline" style="display: inline-block;">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section">
+            <div class="container is-max-desktop">
+
+                <div class="columns is-centered has-text-centered">
+                    <h2 class="title is-3">🥳 Demo Examples</h2>
+                </div>
+                <div class="column">
+                    <p>Image comparisons for the baseline method <strong>EvdeblurNeRF</strong> and our proposed method reconstruction. All images are taken from thetest set.</p>
+                </div>
+
+                <!--/ Matting. -->
+                <div class="columns is-centered has-text-centered">
+                    <!-- Visual Effects. -->
+                    <div class="column">
+                        <div class="content">
+                            <div class="bal-container-small image-compare">
+
+                                <div class="bal-after">
+                                    <img src="static/img/example/city_blocks/evags_cityblocks.png">
+                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                        Ours
+                                    </div>
+                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                        23.71 dB
+                                    </div>
+                                </div>
+
+                                <div class="bal-before" style="width:96.4968152866242%;">
+                                    <div class="bal-before-inset" style="width: 539px;">
+                                        <img src="static/img/example/city_blocks/evdeblurnerf_cityblock.png">
+                                        <div class="bal-beforePosition beforeLabel">
+                                            EvdeblurNeRF
+                                        </div>
+                                        <div class="bal-beforePosition beforeSize">
+                                            22.23 dB
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bal-handle" style="left:96.4968152866242%;">
+                                    <span class=" handle-left-arrow"></span>
+                                    <span class="handle-right-arrow"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="bal-container-small image-compare">
+
+                                <div class="bal-after">
+                                    <img src="static/img/example/desert/evags_desert.png">
+                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                        Ours
+                                    </div>
+                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                        24.88 dB
+                                    </div>
+                                </div>
+
+                                <div class="bal-before" style="width:96.4968152866242%;">
+                                    <div class="bal-before-inset" style="width: 539px;">
+                                        <img src="static/img/example/desert/evdeblurnerf_desert.png">
+                                        <div class="bal-beforePosition beforeLabel">
+                                            EvdeblurNeRF
+                                        </div>
+                                        <div class="bal-beforePosition beforeSize">
+                                            21.62 dB
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bal-handle" style="left:96.4968152866242%;">
+                                    <span class=" handle-left-arrow"></span>
+                                    <span class="handle-right-arrow"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column">
+                        <div class="content">
+
+                            <div class="bal-container-small image-compare">
+
+                                <div class="bal-after">
+                                    <img src="static/img/example/outpool/evags_outpool.png">
+                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                        Ours
+                                    </div>
+                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                        30.26 dB
+                                    </div>
+                                </div>
+
+                                <div class="bal-before" style="width:96.4968152866242%;">
+                                    <div class="bal-before-inset" style="width: 539px;">
+                                        <img src="static/img/example/outpool/evdeblurnerf_outpool.png">
+                                        <div class="bal-beforePosition beforeLabel">
+                                            EvdeblurNeRF
+                                        </div>
+                                        <div class="bal-beforePosition beforeSize">
+                                            29.69 dB
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bal-handle" style="left:96.4968152866242%;">
+                                    <span class=" handle-left-arrow"></span>
+                                    <span class="handle-right-arrow"></span>
+                                </div>
+
+                            </div>
+                            <div class="bal-container-small image-compare">
+
+                                <div class="bal-after">
+                                    <img src="static/img/example/pokermon/evags_pokermon.png">
+                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                        Ours
+                                    </div>
+                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                        RankIQA↓ 5.09
+                                    </div>
+                                </div>
+
+                                <div class="bal-before" style="width:96.4968152866242%;">
+                                    <div class="bal-before-inset" style="width: 539px;">
+                                        <img src="static/img/example/pokermon/evdeblurnerf_pokermon.png">
+                                        <div class="bal-beforePosition beforeLabel">
+                                            EvdeblurNeRF
+                                        </div>
+                                        <div class="bal-beforePosition beforeSize">
+                                            RankIQA↓ 5.25
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bal-handle" style="left:96.4968152866242%;">
+                                    <span class=" handle-left-arrow"></span>
+                                    <span class="handle-right-arrow"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ Visual Effects. -->
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <div class="is-centered" style="margin-bottom: 1.5rem;">
+                    <h2 class="title is-3">💫 Conclusion</h2>
+                </div>
+                <p>
+                    We introduce Event Stream Assisted Gaussian Splatting (<span class="gradient-text"><strong>EvaGaussians</strong></span>), a novel framework that seamlessly integrates the event streams captured by an event camera into the training of 3D-GS, effectively addressing the challenges of reconstructing high-quality 3D-GS from motion-blurred images. We contribute two novel datasets and conduct comprehensive experiments. The results demonstrate that our method outperforms previous state-of-the-art deblurring rendering techniques in terms of novel view synthesis quality, without sacrificing inference efficiency.
+                    Despite its promising performance, our method may still face challenges when reconstructing scenes with extremely intricate textures from severely blurred images. We will release our code and dataset for future research.            
+                </p>
+            </div>
+        </section>
+
+
+        <script>
+            for (var elm of document.querySelectorAll(".image-compare")) {
+                new BeforeAfter(elm)
+            }
+            var options = {
+                slidesToScroll: 1,
+                slidesToShow: 3,
+                loop: true,
+                infinite: true,
+                autoplay: false,
+                autoplaySpeed: 3000,
+            }
+
+            // Initialize all div with carousel class
+            var carousels = bulmaCarousel.attach('.carousel', options);
+
+            for (var i = 0; i < carousels.length; i++) {
+                // Add listener to  event
+                carousels[i].on('before:show', () => { });
+            }
+
+            // Access to bulmaCarousel instance of an element
+            var element = document.querySelector('#my-element');
+            if (element && element.bulmaCarousel) {
+                // bulmaCarousel instance is available as element.bulmaCarousel
+                element.bulmaCarousel.on('before-show', () => { });
+            }
+        </script>
+    </body>
+
+    </html>
